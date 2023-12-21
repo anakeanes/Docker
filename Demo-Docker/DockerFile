@@ -1,7 +1,8 @@
-FROM golang:1.22rc1-alpine3.19
+FROM golang:1.20.4-alpine3.17
 
 #define working directory
 #the function still in green color at first instead of the purple that it has to be
+#after install docker plugin, the colors changed properly
 WORKDIR /app
 
 # the fist . stands for current directory
@@ -15,3 +16,19 @@ EXPOSE 8080
 
 # command of running
 CMD ['./api'""]
+
+#build docker via command: docker build -t demo-go-api .
+#the docker plugin is not install yet, cannot pull from the first line: FROM golang:1.20.4-alpine3.17
+#install the dicker plugin extension
+#build docker success
+
+#check if the docker is successfully built via the command: docker images
+
+#Issue log
+#docker: Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:8080 -> 0.0.0.0:0: listen tcp 0.0.0.0:8080: bind: address already in use. //Port 8080 is in used
+#go to main terminal and press CTRL+C to stop using port 8080
+#type in the following command again: docker run -d -p 8080:8080 demo-go-api
+#check if it's running at the destination port by the command: docker ps
+
+
+#Now we can use the API via the docker container
