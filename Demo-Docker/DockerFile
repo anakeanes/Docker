@@ -1,0 +1,17 @@
+FROM golang:1.22rc1-alpine3.19
+
+#define working directory
+#the function still in green color at first instead of the purple that it has to be
+WORKDIR /app
+
+# the fist . stands for current directory
+# the second . stands for the destination path
+COPY . .
+
+RUN go build -o api
+
+# define which port to run
+EXPOSE 8080
+
+# command of running
+CMD ['./api'""]
