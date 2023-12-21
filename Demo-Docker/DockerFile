@@ -29,6 +29,22 @@ CMD ['./api'""]
 #go to main terminal and press CTRL+C to stop using port 8080
 #type in the following command again: docker run -d -p 8080:8080 demo-go-api
 #check if it's running at the destination port by the command: docker ps
+#docker ps didn't show the container: try to restart docker or show or list via: docker ps -a
+#open safari and port 8080 is not showing
+#restart via command: docker restart dockerImageID // same old result
+
 
 
 #Now we can use the API via the docker container
+
+#to remove docker, use the following command: docker rmi -f ImageID
+
+
+#push to docker hub
+#command: docker login
+#command: docker tag imageName Repository(username/repository):latest
+#command: docker push Repository(username/repository):tagname
+
+#if we want to download / pull the docker from docker hub
+#example: search for database (mysql) on docker hub/ it will show the prepared docker for mysql
+#we can use the command: docker pull mysql / type in the terminal
