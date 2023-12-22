@@ -1,0 +1,16 @@
+#yml file is a configuration file that store the keys value (if it's in json will be {})
+#<key>: value
+
+#define docker version
+version: '3' 
+
+#service will define which container (1 or more) that we want to run
+services:
+  #name the container(like --name) (example command: docker run -d -p 8000:8000 --name my-container node-server)
+  #to see the log of the docker, use command: docker log <docker name>
+  node-server:
+    #repositary of the docker file
+    build: 
+    #define the port (map the external:internal port like -p in docker run)
+    port:
+      - "8000:8000"
