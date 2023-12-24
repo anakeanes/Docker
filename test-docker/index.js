@@ -57,3 +57,5 @@ app.listen(port, async () => {
 //   at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
 
 //turns out that we haven't install mysql package yet, add the line on the top: const mysql = require('mysql/promise')
+//install mysql2 via the command: npm i mysql2 (npm = node package manager)
+//then build the docker again via the command: docker-compose up -d --build, now node is running via: docker ps
