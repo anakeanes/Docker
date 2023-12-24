@@ -25,6 +25,12 @@ app.get ('/hello-world', (req, res) => { //go to path http://localhost:8000/hell
     res.send('hello world')
 })
 
+// create path to get the details from the database
+app.get('/user', async (req,res) => {
+    const [result] = await conn.query ('SELECT * FROM user') //define the array "result" to store the value from the requested asynchronous function. coonection query with the command of SQL
+    res.json(result) //define the response in json format, store in the variable "result"
+})
+
 app.listen(port, async () => {
     await initMySQL()
     console.log(`Server running at http://localhost:${port}/`) //beware of using '' and ``
