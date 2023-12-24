@@ -38,7 +38,9 @@ services:
     #<external path: internal path>
     #everytime we run and found that the external path has the data, it will replace the internal data in the container. Prevent to create duplicate container all the times
     volumes:
-      - /data:/var/lib/mysql
+      - ./data:/var/lib/mysql
+
+    #the data in myphp will still remain even we docker-compose down and docker-compose up again
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
