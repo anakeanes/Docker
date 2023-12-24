@@ -4,6 +4,7 @@
 
 
 const express = require('express')
+const mysql = require('mysql2/promise')
 const app = express()
 const port = 8000
 
@@ -40,3 +41,19 @@ app.listen(port, async () => {
 
 // after create a function of get method from phpmyadmin, use the command: docker-compose down, to stop the running docker before we build them up again
 // then run the command: docker-compose up -d --build
+
+//try to shoot the API via Postman
+//issue log: it cannot get the value from the address http://localhost:8080/user (come out with 404 not found)
+//command: docker ps, will see that the container "node" is not running, use the command: docker ps -a abnd we will se the "node" docker has been killed
+//Find the reasin via the command: docker logs node, the output will be as the following
+///usr/src/app/index.js:14
+//conn = await mysql.createConnection({ 
+//    ReferenceError: mysql is not defined
+//    at initMySQL (/usr/src/app/index.js:14:5)
+//    at Server.<anonymous> (/usr/src/app/index.js:35:11)
+//    at Object.onceWrapper (node:events:631:28)
+//    at Server.emit (node:events:529:35)
+//    at emitListeningNT (node:net:1851:10)
+//   at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+//turns out that we haven't install mysql package yet, add the line on the top: const mysql = require('mysql/promise')
