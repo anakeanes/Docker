@@ -35,6 +35,8 @@ services:
       - "3306:3306"
 
     #add container-volume
+    #<external path: internal path>
+    #everytime we run and found that the external path has the data, it will replace the internal data in the container. Prevent to create duplicate container all the times
     volumes:
       - /data:/var/lib/mysql
   phpmyadmin:
