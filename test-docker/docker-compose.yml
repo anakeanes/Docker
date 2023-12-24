@@ -5,12 +5,57 @@
 version: '3' 
 
 #service will define which container (1 or more) that we want to run
-services:
   #name the container(like --name) (example command: docker run -d -p 8000:8000 --name my-container node-server)
   #to see the log of the docker, use command: docker log <docker name>
+services:
+  #service name
   node-server:
+    container_name: node 
     #repositary of the docker file
-    build: 
+    #. is a current repository
+    build: '/Users/macbookpro/Documents/GitHub/Docker/Docker/test-docker'
     #define the port (map the external:internal port like -p in docker run)
-    port:
+    ports:
       - "8000:8000"
+
+    # to run docker compose, use the command: docker-compose up -d --build (change from the image to the container)
+    # we didn't define the yml path because the "up" commmand is a default path
+    # incident log:services.node-server.build must be a string (move the comments up: pass)
+    # tested by localhost:8000/hello-world
+
+  #add database
+  db:
+    image: mysql:latest
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root #define user for root mysql
+      MYSQL_DATABASE: tutorial #define inititate database for mysql
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db       #define host that will use phpmyadmin to manage
+      PMA_PORT: 3306     #port of the database
+      PMA_USER: root     #user of the database
+      PMA_PASSWORD: root #password of the database
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+# root is just for the demonstration, do not use it on production site
+# use the command: docker-compose down, to stop the running container and network
+# then use the command: docker-compose up -d --build
+# issue log: image: <name:lastest>, no spacing in between
+# docker ps, and out put will be 
+#CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS                               NAMES
+#70ff0de23c43   phpmyadmin/phpmyadmin:latest   "/docker-entrypoint.…"   13 seconds ago   Up 10 seconds   0.0.0.0:8080->80/tcp                phpmyadmin
+#24c3f18ddfa9   mysql:latest                   "docker-entrypoint.s…"   13 seconds ago   Up 11 seconds   0.0.0.0:3306->3306/tcp, 33060/tcp   db
+#65dfad3bd1fc   test-docker-node-server        "docker-entrypoint.s…"   13 seconds ago   Up 11 seconds   0.0.0.0:8000->8000/tcp              node
+
+# use the command: docker logs <container's name>
+# the output will come out in form of "Server running at http://localhost:8000"
+# try to go to http://localhost:8080, the correct path we should see phpmyadmin page
