@@ -33,6 +33,10 @@ services:
       MYSQL_DATABASE: tutorial #define inititate database for mysql
     ports:
       - "3306:3306"
+
+    #add container-volume
+    volumes:
+      - /data:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin

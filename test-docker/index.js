@@ -59,3 +59,9 @@ app.listen(port, async () => {
 //turns out that we haven't install mysql package yet, add the line on the top: const mysql = require('mysql/promise')
 //install mysql2 via the command: npm i mysql2 (npm = node package manager)
 //then build the docker again via the command: docker-compose up -d --build, now node is running via: docker ps
+
+//issue log2: make sure the table in phpmyadmin is still running. first attemp to shoot the api is unsuccessful, then retry it with the new table and keep it running
+//this is happening becuase the phpmyadmin data has stored in the docker only (no external storage), once the docker is downed, the data will be no longer existed
+//Solve this problem with "docker volume", 2cases to map the data from the container to external path 1. mount with internal storage 2. map with docker volume
+
+//we can use the command: docker-compose up -d instead of docker-compose up -d --build, in case we did nothing to modify the docker file
