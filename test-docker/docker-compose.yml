@@ -38,7 +38,7 @@ services:
     #<external path: internal path>
     #everytime we run and found that the external path has the data, it will replace the internal data in the container. Prevent to create duplicate container all the times
     volumes:
-      - ./data:/var/lib/mysql
+      - mysql_data_test:/var/lib/mysql
 
     #the data in myphp will still remain even we docker-compose down and docker-compose up again
   phpmyadmin:
@@ -54,6 +54,12 @@ services:
     depends_on:
       - db
 
+volumes:
+  #name of the docker volume path
+  mysql_data_test: 
+    driver: local
+#then go change the name for container mysql to mysql_data_test
+
 # root is just for the demonstration, do not use it on production site
 # use the command: docker-compose down, to stop the running container and network
 # then use the command: docker-compose up -d --build
@@ -67,3 +73,5 @@ services:
 # use the command: docker logs <container's name>
 # the output will come out in form of "Server running at http://localhost:8000"
 # try to go to http://localhost:8080, the correct path we should see phpmyadmin page
+
+#everything that involve with data storage or database, need to define the docker volume
