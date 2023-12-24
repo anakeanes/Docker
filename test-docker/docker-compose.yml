@@ -75,3 +75,11 @@ volumes:
 # try to go to http://localhost:8080, the correct path we should see phpmyadmin page
 
 #everything that involve with data storage or database, need to define the docker volume
+#command: docker volume ls, to see the list of system docker volume
+
+#try docker-compose down
+#and then docker volume rm <docker-volume-name>, to remove the docker volume
+
+#explore inside of the container (it always a linux), use command: docker exec -it <container name> sh, example docker exec -it mysql sh, docker exec -it mysql bash
+#it will show sh-4.4# then type command: mysql -u -root -p, it will request password
+#mysql command: show tables;, show databases; > use tutorial;> show tables; > select * from users;
