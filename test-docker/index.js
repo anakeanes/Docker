@@ -37,3 +37,6 @@ app.listen(port, async () => {
 })
 
 //then create docker file to create custom image
+
+// after create a function of get method from phpmyadmin, use the command: docker-compose down, to stop the running docker before we build them up again
+// then run the command: docker-compose up -d --build
